@@ -14,8 +14,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-
-
 import java.util.Arrays;
 import java.util.Random;
 
@@ -168,14 +166,9 @@ public class StartGame extends Application {
 
         if (token == 'X')
         {
-
-
-
-
-
             Ellipse ellipse = new Ellipse(cell.getWidth() / 2,
-                    cell.getHeight() / 2, cell.getWidth() / 2 - 10,
-                    cell.getHeight() / 2 - 10);
+            cell.getHeight() / 2, cell.getWidth() / 2 - 10,
+            cell.getHeight() / 2 - 10);
             ellipse.centerXProperty().bind(cell.widthProperty().divide(2));
             ellipse.centerYProperty().bind(cell.heightProperty().divide(2));
             ellipse.radiusXProperty().bind(cell.widthProperty().divide(2).subtract(10));
@@ -185,12 +178,11 @@ public class StartGame extends Application {
             cell.setNext();
             cell.token=c;
             cell.getChildren().add(ellipse); // Add the ellipse to the pane
-            if(currentPlayer=='a') {
-
-
-                sendTurn();
-            }
+            
+            if(currentPlayer=='a') {sendTurn();}
+            
         }
+        
         else if (token == 'O') {
             Ellipse ellipse = new Ellipse(cell.getWidth() / 2,
                     cell.getHeight() / 2, cell.getWidth() / 2 - 10,
@@ -201,17 +193,13 @@ public class StartGame extends Application {
             ellipse.radiusYProperty().bind(cell.heightProperty().divide(2).subtract(10));
             ellipse.setStroke(Color.BLACK);
             ellipse.setFill(Color.BLACK);
-
             cell.token=c;
             cell.setNext();
             getChildren().add(ellipse); // Add the ellipse to the pane
-            if(currentPlayer=='b') {
-
-
-                sendTurn();
-            }
+            
+            if(currentPlayer=='b') {sendTurn();}
+            
         }
-
 
     }
 
@@ -219,7 +207,8 @@ public class StartGame extends Application {
 
     /** Handle a mouse click event */
     public void handleMouseClick()
-    {
+    {   
+        //Initiates mostRecent on the first move only
         if(firstMove==0){firstMove++;
         mostRecent=this;
         };
@@ -235,22 +224,15 @@ public class StartGame extends Application {
         {
 
             if(currentPlayer=='a'&& bot==false){
-
-
                 mostRecent.setToken(whoseTurn,mostRecent);
-                cellTwo[mostRecent.row][mostRecent.column].setToken('X',cellTwo[mostRecent.row][mostRecent.column]);
-
-
-
-
-
+                cellTwo[mostRecent.row][mostRecent.column].setToken('X',cellTwo[mostRecent.row][mostRecent.column])
             }
+            
             else if(currentPlayer=='a'&&bot==true){
                 mostRecent.setToken(whoseTurn,mostRecent);
 
             }
             else if(currentPlayer=='b'){
-
                 mostRecent.setToken(whoseTurn,mostRecent);
                 cell[mostRecent.row][mostRecent.column].setToken('O',cell[mostRecent.row][mostRecent.column]);
 
