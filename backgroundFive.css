@@ -1,0 +1,26 @@
+#spooky{
+
+    -fx-background-image: url("images/spookyFIve.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1200 800;
+    -fx-background-position: center center;
+
+}
+#human{
+    -fx-background-image: url("images/humanFIve.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1200 800;
+    -fx-background-position: center center;
+
+
+
+}
+#alien{
+    -fx-background-image: url("images/alienFIve.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 1200 800;
+    -fx-background-position: center center;
+
+
+
+}
