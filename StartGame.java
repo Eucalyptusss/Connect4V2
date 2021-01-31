@@ -357,9 +357,7 @@ public class StartGame extends Application {
         exitVButton.setMaxSize(400,50.0);
         exitVButton.setAlignment(Pos.CENTER);
         //Board Button
-        Button boardButton=new Button("Return to board");
-        boardButton.setMaxSize(400,50.0);
-        boardButton.setAlignment(Pos.CENTER);
+       
         //Spooky Button
         Button spookyButton=new Button("spooky");
         spookyButton.setTextFill(Color.BLACK);
