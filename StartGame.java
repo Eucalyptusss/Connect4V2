@@ -213,7 +213,7 @@ public class StartGame extends Application {
         mostRecent=this;
         };
 
-        System.out.println(mostRecent.row+" is the  row "+ mostRecent.column +" is the column");
+      
         if(bot==true && currentPlayer=='b'){
             return;
 
@@ -723,15 +723,8 @@ public class StartGame extends Application {
         int f=0;
         char tok=mostRecent.token;
         int k;
-
-        System.out.println("At the start of isWon:");
-        System.out.println("row is "+row+" col is "+col+" token is "+tok);
-        System.out.println("Keep in mind, this data should match that of the player who most recently played");
-
-
+        
         if(tok=='X') {
-
-
             //Vertical
             try {
 
@@ -781,12 +774,6 @@ public class StartGame extends Application {
                 row=mostRecent.row;
 
                 for (int i = row; i <= 5; i++) {
-                    System.out.println("-------------------------------------------------------");
-                    System.out.println("Hey this is the place where the fuck up is happening");
-                    System.out.println("The current player is " + tok);
-                    System.out.println(i+" is the row "+k+" is the column");
-                    System.out.println(f);
-                    System.out.println("-------------------------------------------------------");
                     if (cell[i][k].token == tok) {
                         f++;
                         k++;
@@ -797,32 +784,17 @@ public class StartGame extends Application {
 
                 }
 
-
-
-
-            System.out.println(f+" is the f value after down right");
-
-
-
-
                 //Up Left
 
                 check = col - 1;
 
                 for (int i = row - 1; i >= 0; i--) {
-                    System.out.println(f+" is the f after each loop");
-                    System.out.println("line 834");
                     if (cell[i][check].token == tok) {
                         f++;
                         check--;
                     } else {
                         break;
                     }}
-                System.out.println("this is the f at the end of the loop "+f);
-
-
-                System.out.println("After diagonal check NW "+f);
-
                 if (f >= 4) {
 
                     return true;
@@ -867,7 +839,6 @@ public class StartGame extends Application {
             } catch (ArrayIndexOutOfBoundsException e) {
 
             }
-            System.out.println("After diagonal check NE "+f);
             if (f >= 4) { 
                 return true;
             }
@@ -925,13 +896,6 @@ public class StartGame extends Application {
 
                 for (int i = row; i <= 5; i++) {
                     if (cellTwo[i][k].token == tok) {
-                        System.out.println("-------------------------------------------------------");
-                        System.out.println("Hey this is the place where the fuck up is happening");
-                        System.out.println("The current player is " + tok);
-                        System.out.println(i+" is the row "+k+" is the column");
-                        System.out.println(f);
-                        System.out.println("-------------------------------------------------------");
-
                         f++;
                         k++;
                     } else {
@@ -1289,12 +1253,7 @@ public class StartGame extends Application {
             av[3]=col;
 
             if(direction=='W'){
-                System.out.println("The player is going West and the target row is "+row+" col is "+ col);
-                System.out.println("The target is available?(WEST) "+cellTwo[row][col].isAvailable());
-
                 if(cellTwo[row][col].isAvailable()){
-                    System.out.println("I am playing at the target(WEST).");
-
                     mostRecent=cellTwo[row][col];
                     target=true;
                     return;
@@ -1306,25 +1265,18 @@ public class StartGame extends Application {
 
                 }
                 else{
-                    System.out.println("The target spot is unavailable and I need to avoid a space(WEST)");
                     if(findAvoid()!= null){
                         fillAvoid(av,row+1,col);
-                        System.out.println("There is a variable available and I am avoiding  row "+(row+1)+" col "+(col));
-
                     }
 
                 }
 
             }
             else if(direction=='E'){
-                System.out.println("The player is going East and the target row is "+row+" col is "+ col);
-                System.out.println("The target is available? "+cellTwo[row][col].isAvailable());
                 if(cellTwo[row][col].isAvailable()){
-                    System.out.println("I am playing at the target(EAST).");
                     mostRecent=cellTwo[row][col];
                     target=true;
                     return;
-
                 }
                 else if(cellTwo[row+2][col].isAvailable()){
                     mostRecent=cellTwo[row+2][col];
@@ -1333,15 +1285,10 @@ public class StartGame extends Application {
 
                 }
 
-                    System.out.println("The target spot is unavailable and I need to avoid a space(EAST)");
-
-
-
+            
                     if(findAvoid()!= null){
-                        System.out.println("There is a variable available and I am avoiding  row "+(row+1)+" col "+(col));
                         fillAvoid(av,row+1,col);
                         return;
-
                     }
 
 
@@ -1350,10 +1297,7 @@ public class StartGame extends Application {
             }
 
             else if(direction=='T'|| direction=='P'){
-                System.out.println("The player is going Diagonal and the target row is "+row+" col is "+ col);
-                System.out.println("The target is available? "+cellTwo[row][col].isAvailable());
                 if(cellTwo[row][col].isAvailable() ){
-                    System.out.println("I am playing at the target(Diagonal).");
                         mostRecent = cellTwo[row][col];
                         target=true;
                         return;
@@ -1365,16 +1309,11 @@ public class StartGame extends Application {
                     return;
                 }
 
-                    System.out.println("The target spot is unavailable and I need to avoid a space(DIAGONAL)");
+                   
                     if(findAvoid()!= null){
-                        System.out.println("There is a variable available and I am avoiding  row "+(row+1)+" col "+(col));
                         fillAvoid(av,row+1,col);
 
-                    }
-
-
-
-            }
+                    }   }
 
         }
         public boolean avoidIt(int row, int col){
@@ -1415,10 +1354,7 @@ public class StartGame extends Application {
         public void playTurn(){
 
             updateTargets();
-            System.out.println(" ");
-            System.out.println("Starting Turn:------------------------------------");
-            if(targetChecker()==true){
-                System.out.println("Target Checker was true and played at row "+mostRecent.row+" col "+mostRecent.column);
+            if(targetChecker()){
                 return;
             }
             int row=mostRecent.row;
@@ -1427,23 +1363,8 @@ public class StartGame extends Application {
             int vertical=blockCount("vertical");
             int horizontal=blockCount("horizontal");
             int diagonal=blockCount("diagonal");
-
-            System.out.println("Here is the updated list of places to avoid");
-            System.out.println(avoidOne[0]+" "+avoidOne[1]);
-            System.out.println(avoidTwo[0]+" "+avoidTwo[1]);
-            System.out.println(avoidThree[0]+" "+avoidThree[1]);
-            System.out.println(avoidFour[0]+" "+avoidFour[1]);
-
-            System.out.println("Here is the updated list of places to target");
-            System.out.println(avoidOne[2]+" "+avoidOne[3]);
-            System.out.println(avoidTwo[2]+" "+avoidTwo[3]);
-            System.out.println(avoidThree[2]+" "+avoidThree[3]);
-            System.out.println(avoidFour[2]+" "+avoidFour[3]);
-
-
             int f=0;
             int k;
-            System.out.println("Checking out every space now");
             for(int i=5;i>=0;i--){
 
                 for(int j=0;j<=6;j++){
@@ -1569,11 +1490,11 @@ public class StartGame extends Application {
 
                     else if(cellTwo[i][j].token=='X'){
                         tok='X';
-                        System.out.println("Checking the position at row "+i+" col "+j);
+                    
                         //Vertical
                         f=0;
                         try {
-                            System.out.println("Running entire board vertical check.....");
+                           
 
                             for (int r = i; r >= 0; r--) {
                                 if (cellTwo[r][j].token == tok) f++;
@@ -1581,20 +1502,17 @@ public class StartGame extends Application {
                             }
 
                             if (f >= 3) {
-                                System.out.println("The vertical check has a hit and is seeing if the target spot is available");
+                             
 
 
                                 if (cellTwo[i-3][j].isAvailable() ) {
                                     mostRecent = cellTwo[i - 3][j];
-                                    System.out.println("Vertical Check Success");
                                     return;
                                 }
                             }
                         }
                         catch (ArrayIndexOutOfBoundsException r){}
-                        System.out.println("Vertical Check Fail");
-                        System.out.println("Running entire board horizontal check.....");
-
+                       
                         try {
                             f = 1;
                             //Horizontal
@@ -1606,12 +1524,12 @@ public class StartGame extends Application {
                                 }
                             }
                             if (f >= 3) {
-                                System.out.println("The Horizontal check has a hit and is seeing if the target spot is available(EAST CHECK)");
+                               
                                 targetSpot = cellTwo[i][j+3];
-                                System.out.println("The target spot is row " + i + " col " + (j + 3));
+                      
                                 upgradedTarget('E');
                                 if(target==true) {
-                                    System.out.println("Horizontal Check Success");
+                                   
                                     return;}
 
                             }
@@ -1626,12 +1544,10 @@ public class StartGame extends Application {
                                 else break;
                             }
                             if (f >= 2) {
-                                System.out.println("The horizontal check has a hit and is seeing if the target spot is available(WEST CHECK)");
-                                System.out.println("The target spot is row "+i+" col "+(j-3));
+                               
                                 targetSpot = cellTwo[i][j - 3];
                                 upgradedTarget('W');
                                 if(target==true) {
-                                    System.out.println("Horizontal Check Success");
                                     return;
                                 }
                             }
@@ -1640,9 +1556,7 @@ public class StartGame extends Application {
 
                         }
                         //Check diagonal
-                        System.out.println("Horizontal Check Fail");
-                        System.out.println("Starting Diagonal Check... ");
-
+                     
                         f = 0;
                         k = j;
                         //Up Right
@@ -1659,9 +1573,6 @@ public class StartGame extends Application {
 
                             }
                             if (f >= 3) {
-                                System.out.println("The diagonal check has a hit and is seeing if the target spot is available");
-                                System.out.println("Diagonal Check Success");
-                                System.out.println("The player is going in the direction NE");
                                 targetSpot = cellTwo[i - 3][j + 3];
                                 upgradedTarget('T');
                                 if(target==true) return;
@@ -1686,34 +1597,19 @@ public class StartGame extends Application {
                             }
 
                             if (f >= 3) {
-                                System.out.println("The diagonal check has a hit and is seeing if the target spot is available");
-                                System.out.println("Diagonal Check Success");
-                                System.out.println("The player is going in the direction NW");
                                 targetSpot = cellTwo[i - 3][j - 3];
                                 upgradedTarget('P');
                                 if(target==true) return;
                             }
-                        } catch (ArrayIndexOutOfBoundsException e) {
-
-                        }
-                        System.out.println("Diagonal Check fail ");
-
+                        } catch (ArrayIndexOutOfBoundsException e) {}
                     }
 
                 }
 
             }
 
-
-
-
-
-
             char dir;
             String [] ordered=order(vertical,horizontal,diagonal);
-            System.out.println("The player is going "+ ordered[2]);
-
-
             try {
 
                 if (ordered[2].equals("vertical")) {
@@ -1738,24 +1634,12 @@ public class StartGame extends Application {
                     //To the right
                     target=false;
                     dir = direction();
-                    System.out.println("The player is going int the direction "+ dir);
-
                     if (dir == 'e') {
                         targetSpot = cellTwo[row][col + 1];
-                        System.out.println("The target spot is row "+row+" col "+(col+1));
                         upgradedTarget('E');
-
-
                     } else if (dir == 'w') {
-
                         targetSpot = cellTwo[row][col - 1];
-                        upgradedTarget('W');
-
-
-                    }
-                }
-
-
+                        upgradedTarget('W');}}
                 }
 
             catch(Exception e){
@@ -1770,14 +1654,13 @@ public class StartGame extends Application {
 
                         dir = direction();
                         if (dir == 'T') {
-                            System.out.println("The player is going in the direction NE");
                             targetSpot = cellTwo[row - 1][col + 1];
                             upgradedTarget('T');
 
 
                         }
                         else if (dir == 'Y') {
-                            System.out.println("The player is going in the direction NW");
+                         
                             targetSpot = cellTwo[row - 1][col - 1];
                             upgradedTarget('P');
 
@@ -1794,17 +1677,17 @@ public class StartGame extends Application {
 
 
             if(target==false){
-                System.out.println("I am using the betterSpaceFinder");
+               
                 try {
                     mostRecent = betterSpaceFinder();
-                    System.out.println("I played at row "+mostRecent.row+" col "+mostRecent.column);
+                   
                 }
             catch (NullPointerException e){
                     mostRecent=spaceFinder();
             }
             }
 
-            System.out.println("Ending Turn.---------------------------------");
+         
 
 
 
